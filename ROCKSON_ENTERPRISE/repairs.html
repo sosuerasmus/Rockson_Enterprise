@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Repairs | Rockson Enterprise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header></header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Professional Phone Repairs</h1>
+            <p>iPhone, Android, Flashing, and Accessories Services</p>
+            <a href="#repair-grid" class="btn-primary">View All Services</a>
+        </div>
+    </section>
+
+    <section class="repairs products" id="repair-grid">
+        <h2>Phone Repair Services</h2>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="iphone">iPhone</button>
+            <button class="filter-btn" data-category="android">Android</button>
+            <button class="filter-btn" data-category="flashing">Flashing</button>
+            <button class="filter-btn" data-category="accessories">Accessories</button>
+        </div>
+
+        <div class="product-grid" id="repairs-container">
+            </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="repairs-data.js"></script>
+    <script src="layout.js"></script> 
+    
+    <script>
+        // No fetch needed! Data comes directly from repairs-data.js
+
+        // 3. DISPLAY REPAIRS
+        function displayRepairs(filterCategory) {
+            const container = document.getElementById('repairs-container');
+            if (!container) return;
+            container.innerHTML = ''; 
+
+            allRepairServices.forEach(service => {
+                if (filterCategory === 'all' || service.category === filterCategory) {
+                    const card = document.createElement('div');
+                    card.classList.add('product-card');
+                    
+                    card.innerHTML = `
+                        <div style="position: relative;">
+                            <span style="position: absolute; top: 10px; right: 10px; background: #28a745; color: white; padding: 5px 10px; font-size: 10px; border-radius: 5px; font-weight: bold;">OFFICIAL WARRANTY</span>
+                            <img src="${service.img}" alt="${service.name}" onerror="this.src='images/repair-placeholder.jpg'">
+                        </div>
+                        <h3>${service.name}</h3>
+                        <p>${service.price}</p>
+                        <div class="card-actions">
+                            <button class="btn-primary" onclick="openServiceQuickView('${service.name}', '${service.img}', '${service.price}')">Quick View</button>
+                            <button class="btn-primary" onclick="bookService('${service.name}')">Book Now</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        // 4. FILTER BUTTON LOGIC
+        function setupFilterLogic() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    displayRepairs(btn.dataset.category);
+                });
+            });
+        }
+
+        // 5. QUICK VIEW (Synced with layout.js)
+        function openServiceQuickView(name, img, price) {
+            const modal = document.getElementById('quick-view-modal');
+            if(!modal) return;
+            
+            document.getElementById('modal-img').src = img;
+            document.getElementById('modal-name').textContent = name;
+            document.getElementById('modal-price').textContent = price;
+            
+            document.getElementById('modal-actions').innerHTML = `
+                <button class="btn-primary" style="width:100%" onclick="bookService('${name}')">
+                    Confirm Booking via WhatsApp
+                </button>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        // Start the page
+        document.addEventListener("DOMContentLoaded", () => {
+            displayRepairs('all'); 
+            setupFilterLogic();
+        });
+    </script>
+</body>
+</html>

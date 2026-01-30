@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | Rockson Enterprise</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-form { max-width: 500px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .admin-form input, .admin-form select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <header></header> <div class="admin-form">
+        <h2>Add New Product</h2>
+        <form id="productForm">
+            <input type="text" id="pName" placeholder="Product Name" required>
+            <input type="number" id="pPrice" placeholder="Price (GH₵)" required>
+            <select id="pCategory">
+                <option value="phones">Phones</option>
+                <option value="accessories">Accessories</option>
+                <option value="watches">Watches</option>
+            </select>
+            <input type="text" id="pImg" placeholder="Image URL (e.g., images/iphone.jpg)" required>
+            <button type="submit" class="btn-primary" style="width: 100%;">Add to Shop</button>
+        </form>
+    </div>
+
+    <script src="layout.js"></script>
+    <script>
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 1. Capture Form Data
+            const newProduct = {
+                id: Date.now(), // Unique ID based on time
+                name: document.getElementById('pName').value,
+                price: parseFloat(document.getElementById('pPrice').value),
+                category: document.getElementById('pCategory').value,
+                img: document.getElementById('pImg').value
+            };
+
+            // 2. Get existing products from LocalStorage
+            let localProducts = JSON.parse(localStorage.getItem('rockson_custom_products')) || [];
+            
+            // 3. Add new product and save
+            localProducts.push(newProduct);
+            localStorage.setItem('rockson_custom_products', JSON.stringify(localProducts));
+
+            alert('Product added successfully! Go to the Shop page to see it.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

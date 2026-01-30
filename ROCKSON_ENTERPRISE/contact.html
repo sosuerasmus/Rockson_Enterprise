@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Rockson Enterprise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- NAVBAR -->
+<header class="navbar">
+    <h1 class="logo">Rockson <span>Enterprise</span></h1>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="repairs.html">Repairs</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="cart-icon">
+            🛒 <span id="cart-count">0</span>
+            <div class="cart-dropdown">
+                <h4>Cart Items</h4>
+                <ul></ul>
+                <p>Total: $0</p>
+            </div>
+        </li>
+    </ul>
+</header>
+    <header></header>
+    
+
+    <section class="hero" style="
+        background: ()
+        url('images/contact-hero.jpg');
+        background-size: cover;
+        background-position: center;
+    ">
+        <div class="hero-content">
+            <h1>Contact Rockson Enterprise</h1>
+            <p>Phone repairs, flashing, and accessories support — we’re ready to help.</p>
+            <a href="#contact-section" class="btn-primary">Send a Message</a>
+        </div>
+    </section>
+
+    <section class="products" id="contact-section" style="padding: 3rem 5%;">
+        <h2>Get in Touch</h2>
+
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="images/call icon.jpg" alt="Phone" style="width:50px; margin-bottom:15px;">
+                <h3>Phone</h3>
+                <p>
+                    <a href="tel:+233540891165" style="text-decoration:none; color:inherit;">
+                        +233 540 891 165
+                    </a>
+                </p>
+            </div>
+
+            <div class="product-card">
+                <img src="images/whatsapp icon.jpg" alt="WhatsApp" style="width:50px; margin-bottom:15px;">
+                <h3>WhatsApp</h3>
+                <p>
+                    <a 
+                        href="https://wa.me/233540891165?text=Hello!%20I%20was%20just%20browsing%20the%20Rockson%20Enterprise%20online%20shop.%20%F0%9F%9B%8D%EF%B8%8F%20I'm%20interested%20in%20one%20of%20your%20products%20and%20wanted%20to%20check%20if%20you%20have%20it%20in%20stock%20and%20what%20the%20delivery%20options%20are.%20Thank%20you!"
+                        target="_blank"
+                        style="text-decoration:none; color:inherit; font-weight:bold;"
+                    >
+                        Chat with us
+                    </a>
+                </p>
+            </div>
+
+            <div class="product-card">
+                <img src="images/location.jpg" alt="Location" style="width:50px; margin-bottom:15px;">
+                <h3>Location</h3>
+                <p>Brewaniase, Oti Region</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" style="padding: 3rem 5%;">
+        <h2>Send Us a Message</h2>
+        <form id="whatsappForm" style="max-width:600px; margin:0 auto; display:flex; flex-direction:column; gap:15px;">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn-primary">Send Message</button>
+        </form>
+    </section>
+
+    <section class="phone-slider">
+        <div class="phone-track">
+            <img src="images/iPhone Repairs - Aussie Mobile Phone Repairs.jpg" alt="iPhone Repair">
+            <img src="images/andriod flash.jpg" alt="Android Flash">
+            <img src="images/accesories.jpg" alt="Accessories">
+            <img src="images/background.jpg" alt="iPhone Repair">
+            <img src="images/keypad.jpg" alt="Android Flash">
+            <img src="images/case.jpg" alt="Accessories">
+        </div>
+    </section>
+
+    <footer></footer>
+
+    <script src="layout.js"></script>
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const msg = document.getElementById('message').value;
+
+            const phone = "233540891165";
+            
+            // Structured message with Bold headers for WhatsApp
+            const text = `*New Inquiry from Rockson Enterprise Website*%0A%0A` +
+                         `*Name:* ${name}%0A` +
+                         `*Email:* ${email}%0A` +
+                         `*Message:* ${msg}%0A%0A` +
+                         `_I am interested in your services and would like to patronize._`;
+
+            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        });
+    </script>
+</body>
+</html>
